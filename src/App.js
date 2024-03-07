@@ -1,5 +1,8 @@
 // import logo from './logo.svg';
 import React from 'react';
+import Header from './components/Header';
+import Main from './components/Main';
+import Sidebar from './components/Sidebar';
 import './App.css';
 
 
@@ -10,7 +13,11 @@ import './App.css';
 
 function App(props) {
   return (
-    <h1>{props.title}</h1>
+    <div>
+      <Header name="Zihan" color="purple" object="Object" />
+      <Main />
+      <Sidebar />
+    </div>
   );
 };
 
