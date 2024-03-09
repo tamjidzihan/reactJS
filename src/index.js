@@ -4,10 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+
+
+const headingTitle = {
+  titleHeading: "welcome User",
+  titleBody: "You are a Good React Developer"
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App title="welcome" />
+    <App
+      titleHeading={headingTitle.titleHeading}
+      titleBody={headingTitle.titleBody}
+    />
   </React.StrictMode>
 );
 
