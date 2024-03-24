@@ -2,17 +2,18 @@ import { MouseEvent, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 
 
+interface ListProps {
+    items: string[];
+    heading: string;
+    onSelectItem: (item: string) => void;
+}
 
-function ListGroup() {
 
-    let items = [
-        'Dhaka',
-        'Rajsahi',
-        'Khulna',
-        'Barishal',
-        'Rangpur'
-    ];
-    items = [];
+function ListGroup({ items, heading, onSelectItem }: ListProps) {
+
+
+    // items = [];
+
 
     const [selecetedIndex, setSelecetedIndex] = useState(-1)
     console.log(selecetedIndex);
@@ -28,24 +29,26 @@ function ListGroup() {
                 : "list-group-item text-start "} role='button'
             key={item}
             // onClick={() => console.log(index, item)}
-            onClick={() => setSelecetedIndex(index)}
+            onClick={() => {
+                setSelecetedIndex(index)
+                onSelectItem(item)
+            }
+            }
         >
             {index + 1}: {item}
-        </li>
+        </li >
     )
 
 
     return (
         <>
-            <div className='container my-2 fadeUpDown'>
-                <h1 className=' rounded-5  fw-bold text-center text-white  text-uppercase bg-primary '>Districts of bangladesh</h1>
-                {items.length === 0 && <p className=' display-6 text-center  '>No item Found</p>}
-                <ul className="list-group">{listItems}
-                    {/* <li className="list-group-item">An item</li>
-                    <li className="list-group-item">A second item</li>
-                    <li className="list-group-item">A third item</li>
-                    <li className="list-group-item">A fourth item</li>
-                    <li className="list-group-item">And a fifth one</li> */}
+            <div className='container my-2'>
+                <h1 className=' rounded-5  fw-bold text-center text-white  text-uppercase bg-primary '>{heading}</h1>
+                {items.length === 0
+                    && <p className=' display-6 text-center  '>No item Found</p>
+                }
+                <ul className="list-group">
+                    {listItems}
                 </ul>
             </div >
         </>
