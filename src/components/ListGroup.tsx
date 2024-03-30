@@ -2,17 +2,24 @@ import { MouseEvent, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 
 
-interface ListProps {
+interface Props {
     items: string[];
     heading: string;
+    total: number;
+    detail: {
+        capital: string;
+        largestCity: string;
+        otherMajorCities: string;
+        description: string;
+
+    }
     onSelectItem: (item: string) => void;
 }
 
 
-function ListGroup({ items, heading, onSelectItem }: ListProps) {
+function ListGroup({ items, heading, total, detail, onSelectItem }: Props) {
 
     const [selecetedIndex, setSelecetedIndex] = useState(-1)
-    console.log(selecetedIndex);
     // console.log(setSelecetedIndex);
     // const handleClick = (e: MouseEvent) => console.log(e);
 
@@ -20,7 +27,8 @@ function ListGroup({ items, heading, onSelectItem }: ListProps) {
         <li
             className={selecetedIndex === index
                 ? "list-group-item text-start active"
-                : "list-group-item text-start "} role='button'
+                : "list-group-item text-start "}
+            role='button'
             key={item}
             // onClick={() => console.log(index, item)}
             onClick={() => {
@@ -37,6 +45,19 @@ function ListGroup({ items, heading, onSelectItem }: ListProps) {
         <>
             <div className='container my-2'>
                 <h1 className=' rounded-5  fw-bold text-center text-white  text-uppercase bg-primary '>{heading}</h1>
+                <div>
+                    <h3>Description:</h3>
+                    <p>Capital:  {detail.capital}</p>
+                    <p>Largest City: {detail.largestCity}</p>
+                    <p>Other Major Cities: {detail.otherMajorCities}</p>
+                    <p>Description: {detail.description}</p>
+                </div>
+                <div className=' col  '>
+                    <div className='row justify-content-center align-items-end  text-center '>
+                        <p className=' lead col-5 '>In Total: {total}</p>
+                        <p className=' lead col-5 '>Seleceted: {selecetedIndex + 1}</p>
+                    </div>
+                </div>
                 {items.length === 0
                     && <p className=' display-6 text-center  '>No item Found</p>
                 }
@@ -59,7 +80,7 @@ function ListGroup({ items, heading, onSelectItem }: ListProps) {
                             {items.map((item, index) => (
                                 <tr key={item}>
                                     <th scope="row">{index + 1}</th>
-                                    <td>{item}</td>
+                                    <td >{item}</td>
                                 </tr>
                             ))
                             }
