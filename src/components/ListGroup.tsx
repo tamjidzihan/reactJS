@@ -46,6 +46,26 @@ function ListGroup() {
                     <li className="list-group-item">A fourth item</li>
                     <li className="list-group-item">And a fifth one</li> */}
                 </ul>
+                <div>
+                    <table className="table table-striped text-center my-5">
+                        <thead className="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Divisions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {items.map((item, index) => (
+                                <tr key={item}>
+                                    <th scope="row">{index + 1}</th>
+                                    <td>{item}</td>
+                                </tr>
+                            ))
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
             </div >
         </>
     );
