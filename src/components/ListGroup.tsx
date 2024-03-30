@@ -43,6 +43,7 @@ function ListGroup({ items, heading, onSelectItem }: ListProps) {
                 <ul className="list-group">
                     {listItems}
                 </ul>
+
                 <div>
                     <table className="table table-striped text-center my-5">
                         <thead className="thead-dark">
