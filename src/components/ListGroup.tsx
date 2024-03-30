@@ -11,16 +11,10 @@ interface ListProps {
 
 function ListGroup({ items, heading, onSelectItem }: ListProps) {
 
-
-    // items = [];
-
-
     const [selecetedIndex, setSelecetedIndex] = useState(-1)
     console.log(selecetedIndex);
     // console.log(setSelecetedIndex);
-
     // const handleClick = (e: MouseEvent) => console.log(e);
-
 
     const listItems = items.map((item, index) =>
         <li
@@ -39,7 +33,6 @@ function ListGroup({ items, heading, onSelectItem }: ListProps) {
         </li >
     )
 
-
     return (
         <>
             <div className='container my-2'>
@@ -53,6 +46,9 @@ function ListGroup({ items, heading, onSelectItem }: ListProps) {
                 <div>
                     <table className="table table-striped text-center my-5">
                         <thead className="thead-dark">
+                            <tr>
+                                <th className='rounded-5  fw-bold text-center text-white  text-uppercase bg-primary ' colSpan={2}>{heading} <span className=' bg-danger p-2 rounded-5'>On Table</span></th>
+                            </tr>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Divisions</th>
