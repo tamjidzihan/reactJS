@@ -7,7 +7,7 @@ function App() {
   let divisions = {
     items: [
       'Dhaka',
-      'Rajsahi',
+      'Rajshahi',
       'Khulna',
       'Barishal',
       'Rangpur'
@@ -18,44 +18,34 @@ function App() {
 
   interface DivisionDetail {
     [key: string]: {
-      capital: string;
-      largestCity: string;
-      otherMajorCities: string;
-      description: string;
-    };
+      description: string
+    }
   }
+
   let divisionDetail: DivisionDetail = {
     'Dhaka': {
-      capital: "Dhaka",
-      largestCity: "Dhaka",
-      otherMajorCities: "Gazipur, Narayanganj",
       description: "Dhaka Division is the most populous and economically significant division in Bangladesh. It is the political, cultural, and economic center of the country."
-    },
+    }
+    ,
     'Rajshahi': {
-      capital: "Rajshahi",
-      largestCity: "Rajshahi",
-      otherMajorCities: "Bogura, Pabna",
       description: "Rajshahi Division is known for its agricultural production, particularly mangoes and silk. It is located in the northwest of Bangladesh."
-    },
+    }
+    ,
     'Khulna': {
-      capital: "Khulna",
-      largestCity: "Khulna",
-      otherMajorCities: "Jessore, Satkhira",
       description: "Khulna Division is an important industrial and commercial hub, particularly known for its shrimp farming and jute industries. It is situated in the southwestern part of Bangladesh."
-    },
+    }
+    ,
     'Barishal': {
-      capital: "Barishal",
-      largestCity: "Barishal",
-      otherMajorCities: "Patuakhali, Jhalokati",
       description: "Barishal Division is characterized by its numerous rivers and waterways, earning it the nickname 'Venice of the East.' It is located in the southern part of Bangladesh."
-    },
+    }
+    ,
     'Rangpur': {
-      capital: "Rangpur",
-      largestCity: "Rangpur",
-      otherMajorCities: "Dinajpur, Thakurgaon",
       description: "Rangpur Division is primarily an agricultural region known for its production of crops like rice, wheat, and potatoes. It is situated in the northern part of Bangladesh."
     }
+
   };
+
+
 
   let seasons = {
     items: [
@@ -68,11 +58,15 @@ function App() {
     ],
     heading: 'seasons of bangladesh',
     total: 6
+  };
+
+  interface SeasonDetail {
+    [key: string]: {
+      description: string;
+    };
   }
 
-
-
-  let seasonDetail = {
+  let seasonDetail: SeasonDetail = {
     'Summer': {
       description: "Summer in Bangladesh is characterized by hot and humid weather. It typically lasts from March to May, with temperatures often reaching high levels."
     },
@@ -93,37 +87,41 @@ function App() {
     }
   };
 
-  const [selectedDivision, setSelectedDivision] = useState('');
 
-  const handelSelectItem = (item: string) => {
+  const [selectedDivision, setSelectedDivision] = useState('Dhaka');
+
+  const handelSelectdivision = (item: string) => {
     setSelectedDivision(item);
   }
 
-  { console.log(divisionDetail[selectedDivision]) }
+  const [selectedSeason, setselectedSeason] = useState('Summer');
 
-  // let selectedDivisionDetail = divisionDetail[selectedDivision];
+  const handelSelectSeason = (item: string) => {
+    setselectedSeason(item);
+  }
+
 
   return (
     <>
-      <div className=' mb-4 '>
+      <div className=' mb-4 container'>
         <ListGroup
           items={divisions.items}
           heading={divisions.heading}
           total={divisions.total}
-          detail={divisionDetail.Dhaka}
-
-          onSelectItem={handelSelectItem} />
+          seleceted={selectedDivision}
+          detail={divisionDetail[selectedDivision]}
+          onSelectItem={handelSelectdivision} />
       </div>
-      {/* <div >
+      <div >
         <ListGroup
           items={seasons.items}
           heading={seasons.heading}
           total={seasons.total}
-          onSelectItem={(item: string) => {
-            console.log(item)
-          }}
+          seleceted={selectedSeason}
+          detail={seasonDetail[selectedSeason]}
+          onSelectItem={handelSelectSeason}
         />
-      </div> */}
+      </div>
     </>
   )
 }

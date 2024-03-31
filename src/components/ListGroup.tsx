@@ -6,20 +6,17 @@ interface Props {
     items: string[];
     heading: string;
     total: number;
+    seleceted: string;
     detail: {
-        capital: string;
-        largestCity: string;
-        otherMajorCities: string;
         description: string;
-
-    }
+    };
     onSelectItem: (item: string) => void;
 }
 
 
-function ListGroup({ items, heading, total, detail, onSelectItem }: Props) {
+function ListGroup({ items, heading, total, seleceted, detail, onSelectItem }: Props) {
 
-    const [selecetedIndex, setSelecetedIndex] = useState(-1)
+    const [selecetedIndex, setSelecetedIndex] = useState(0)
     // console.log(setSelecetedIndex);
     // const handleClick = (e: MouseEvent) => console.log(e);
 
@@ -47,15 +44,13 @@ function ListGroup({ items, heading, total, detail, onSelectItem }: Props) {
                 <h1 className=' rounded-5  fw-bold text-center text-white  text-uppercase bg-primary '>{heading}</h1>
                 <div>
                     <h3>Description:</h3>
-                    <p>Capital:  {detail.capital}</p>
-                    <p>Largest City: {detail.largestCity}</p>
-                    <p>Other Major Cities: {detail.otherMajorCities}</p>
-                    <p>Description: {detail.description}</p>
+
+                    <p>{detail.description}</p>
                 </div>
                 <div className=' col  '>
                     <div className='row justify-content-center align-items-end  text-center '>
-                        <p className=' lead col-5 '>In Total: {total}</p>
-                        <p className=' lead col-5 '>Seleceted: {selecetedIndex + 1}</p>
+                        <p className=' lead col-5 '><span className=' fw-bold '>In Total: </span>{total}</p>
+                        <p className=' lead col-5 '><span className=' fw-bold '>Seleceted: </span>{seleceted}</p>
                     </div>
                 </div>
                 {items.length === 0
