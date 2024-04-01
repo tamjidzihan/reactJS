@@ -41,10 +41,9 @@ function ListGroup({ items, heading, total, seleceted, detail, onSelectItem }: P
     return (
         <>
             <div className='container my-2'>
-                <h1 className=' rounded-5  fw-bold text-center text-white  text-uppercase bg-primary '>{heading}</h1>
+                <h1 className=' rounded-5 fw-bold text-center text-white text-uppercase bg-primary '>{heading}</h1>
                 <div>
                     <h3>Description:</h3>
-
                     <p>{detail.description}</p>
                 </div>
                 <div className=' col  '>
@@ -64,7 +63,10 @@ function ListGroup({ items, heading, total, seleceted, detail, onSelectItem }: P
                     <table className="table table-striped text-center my-5">
                         <thead className="thead-dark">
                             <tr>
-                                <th className='rounded-5  fw-bold text-center text-white  text-uppercase bg-primary ' colSpan={2}>{heading} <span className=' bg-danger p-2 rounded-5'>On Table</span></th>
+                                <th className='rounded-5 fw-bold text-center text-white text-uppercase bg-primary' colSpan={2}>
+                                    {heading}
+                                    <span className=' bg-danger p-2 rounded-5'>On Table</span>
+                                </th>
                             </tr>
                             <tr>
                                 <th scope="col">#</th>

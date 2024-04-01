@@ -1,6 +1,7 @@
 // import './App.css'
 import { useState } from 'react';
 import ListGroup from './components/ListGroup';
+import Alert from './components/Alert';
 
 function App() {
 
@@ -44,7 +45,6 @@ function App() {
     }
 
   };
-
 
 
   let seasons = {
@@ -100,10 +100,14 @@ function App() {
     setselectedSeason(item);
   }
 
-
   return (
     <>
-      <div className=' mb-4 container'>
+      <div>
+        <Alert>
+          <span className=' fw-bold '>Hello</span> world
+        </Alert>
+      </div>
+      {/* <div className=' mb-4 container'>
         <ListGroup
           items={divisions.items}
           heading={divisions.heading}
@@ -121,7 +125,7 @@ function App() {
           detail={seasonDetail[selectedSeason]}
           onSelectItem={handelSelectSeason}
         />
-      </div>
+      </div> */}
     </>
   )
 }
