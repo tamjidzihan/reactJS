@@ -88,6 +88,51 @@ function App() {
   };
 
 
+  let weekdays = {
+    items: [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ],
+    heading: 'Days of the Weeks',
+    total: 7
+
+  }
+
+  interface WeekdaysDetail {
+    [key: string]: {
+      description: string
+    };
+  }
+
+  let weekdayDetail: WeekdaysDetail = {
+    'Sunday': {
+      description: "The first day of the week in many cultures, traditionally considered a day of rest."
+    },
+    'Monday': {
+      description: "The second day of the week, following Sunday."
+    },
+    'Tuesday': {
+      description: "The third day of the week, following Monday."
+    },
+    'Wednesday': {
+      description: "The fourth day of the week, following Tuesday."
+    },
+    'Thursday': {
+      description: "The fifth day of the week, following Wednesday."
+    },
+    'Friday': {
+      description: "The sixth day of the week, following Thursday."
+    },
+    'Saturday': {
+      description: "The seventh day of the week, following Friday. In many cultures, it is considered the last day of the week."
+    }
+  };
+
   const [selectedDivision, setSelectedDivision] = useState('Dhaka');
 
   const handelSelectdivision = (item: string) => {
@@ -100,6 +145,13 @@ function App() {
     setselectedSeason(item);
   }
 
+  const [selectedWeekday, setselectedWeekday] = useState('Sunday');
+
+  const handelSelectweeks = (items: string) => {
+    setselectedWeekday(items)
+  }
+
+
   return (
     <>
       <div>
@@ -107,16 +159,17 @@ function App() {
           <span className=' fw-bold '>Hello</span> world
         </Alert>
       </div>
-      {/* <div className=' mb-4 container'>
+      <div className=' pb-5 '>
         <ListGroup
           items={divisions.items}
           heading={divisions.heading}
           total={divisions.total}
           seleceted={selectedDivision}
           detail={divisionDetail[selectedDivision]}
-          onSelectItem={handelSelectdivision} />
+          onSelectItem={handelSelectdivision}
+        />
       </div>
-      <div >
+      <div className=' pb-5 '>
         <ListGroup
           items={seasons.items}
           heading={seasons.heading}
@@ -125,7 +178,17 @@ function App() {
           detail={seasonDetail[selectedSeason]}
           onSelectItem={handelSelectSeason}
         />
-      </div> */}
+      </div>
+      <div className=' pb-5'>
+        <ListGroup
+          items={weekdays.items}
+          heading={weekdays.heading}
+          total={weekdays.total}
+          seleceted={selectedWeekday}
+          detail={weekdayDetail[selectedWeekday]}
+          onSelectItem={handelSelectweeks}
+        />
+      </div>
     </>
   )
 }

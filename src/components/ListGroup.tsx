@@ -21,10 +21,9 @@ function ListGroup({ items, heading, total, seleceted, detail, onSelectItem }: P
     // const handleClick = (e: MouseEvent) => console.log(e);
 
     const listItems = items.map((item, index) =>
-        <li
-            className={selecetedIndex === index
-                ? "list-group-item text-start active"
-                : "list-group-item text-start "}
+        <li className={selecetedIndex === index
+            ? "list-group-item text-start active"
+            : "list-group-item text-start "}
             role='button'
             key={item}
             // onClick={() => console.log(index, item)}
@@ -46,7 +45,7 @@ function ListGroup({ items, heading, total, seleceted, detail, onSelectItem }: P
                     <h3>Description:</h3>
                     <p>{detail.description}</p>
                 </div>
-                <div className=' col  '>
+                <div className='col'>
                     <div className='row justify-content-center align-items-end  text-center '>
                         <p className=' lead col-5 '><span className=' fw-bold '>In Total: </span>{total}</p>
                         <p className=' lead col-5 '><span className=' fw-bold '>Seleceted: </span>{seleceted}</p>
@@ -85,6 +84,7 @@ function ListGroup({ items, heading, total, seleceted, detail, onSelectItem }: P
                         </tbody>
                     </table>
                 </div>
+                <p className='py-3 text-center '>~~~~~~~~~~~~~~~~~~New Section Starts~~~~~~~~~~~~~~~~~~~~</p>
             </div >
         </>
     );
