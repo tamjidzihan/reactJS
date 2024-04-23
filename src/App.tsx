@@ -133,17 +133,20 @@ function App() {
     }
   };
 
+
   const [selectedDivision, setSelectedDivision] = useState('Dhaka');
 
   const handelSelectdivision = (item: string) => {
     setSelectedDivision(item);
   }
 
+
   const [selectedSeason, setselectedSeason] = useState('Summer');
 
   const handelSelectSeason = (item: string) => {
     setselectedSeason(item);
   }
+
 
   const [selectedWeekday, setselectedWeekday] = useState('Sunday');
 

@@ -1,5 +1,4 @@
-import React, { ReactNode } from 'react'
-
+import { ReactNode } from "react";
 interface Props {
     children: ReactNode;
 }
@@ -15,3 +14,4 @@ const Alert = ({ children }: Props) => {
 }
 
 export default Alert
+

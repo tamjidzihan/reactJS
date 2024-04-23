@@ -52,7 +52,7 @@ function ListGroup({ items, heading, total, seleceted, detail, onSelectItem }: P
                     </div>
                 </div>
                 {items.length === 0
-                    && <p className=' display-6 text-center  '>No item Found</p>
+                    && <p className=' display-6 text-center'>No item Found</p>
                 }
                 <ul className="list-group">
                     {listItems}
