@@ -1,34 +1,24 @@
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 
-const Button = () => {
-    const [selecetedButton, setSelecetedButton] = useState("btn btn-secondary");
+interface Props {
+    alart: ReactNode
+    children: string;
+    style?: 'primary' | 'secondary' | 'danger' | 'info';
+    onClick: () => void;
+}
 
 
 
-
-    // const listItems = items.map((item, index) =>
-    //     <li className={selecetedIndex === index
-    //         ? "list-group-item text-start active"
-    //         : "list-group-item text-start "}
-    //         role='button'
-    //         key={item}
-    //         // onClick={() => console.log(index, item)}
-    //         onClick={() => {
-    //             setSelecetedIndex(index)
-    //             onSelectItem(item)
-    //         }
-    //         }
-    //     >
-    //         {index + 1}: {item}
-    //     </li >
-
+const Button = ({ alart, children, style = "secondary", onClick }: Props) => {
 
     return (
 
         <div className=' container-fluid text-center my-5 '>
-            <button className={selecetedButton}
-                onClick={() => setSelecetedButton("btn btn-danger ")}
-            >Subscribe</button>
+            {alart}
+            <button
+                className={"btn btn-" + style}
+                onClick={onClick}
+            >{children}</button>
         </div>
 
     )

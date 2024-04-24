@@ -1,8 +1,12 @@
 // import './App.css'
 import { useState } from 'react';
+import { FaUser } from "react-icons/fa";
+import { FaUserNurse } from "react-icons/fa";
+
 import ListGroup from './components/ListGroup';
 import Alert from './components/Alert';
 import Button from './components/Button';
+import AlertButton from './components/AlertButton';
 
 function App() {
 
@@ -156,11 +160,61 @@ function App() {
   }
 
 
+
+  const button = {
+    subscribe: 'Subscribe',
+    subscribed: 'Subscribed',
+  }
+
+  const [selectedButton, setSelectedButton] = useState(button.subscribe)
+
+  const handelButtonClick = () => {
+    setSelectedButton(button.subscribed)
+  }
+
+
+
+  const [alertVisible, SetAlertVisibility] = useState(false)
+
+
+
+
+
+
+
+
+
   return (
+
     <>
-      <div>
-        <Button />
+
+
+      <FaUser color='green' size={50} />
+      <FaUserNurse />
+
+
+
+
+
+
+      <div className=' container text-center '>
+        {alertVisible && <Alert onClose={() => SetAlertVisibility(false)}>The Button Is Clicked </Alert>}
+        <AlertButton
+          onClick={() =>
+            SetAlertVisibility(true)
+            //
+          }
+        />
       </div>
+
+      {/* <div>
+        <Button
+
+          children={selectedButton}
+          style='danger'
+          onClick={handelButtonClick}
+        />
+      </div> */}
 
       {/* <div>
         <Alert>
