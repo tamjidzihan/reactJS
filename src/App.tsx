@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import ListGroup from './components/ListGroup';
 import Alert from './components/Alert';
+import Button from './components/Button';
 
 function App() {
 
@@ -136,9 +137,9 @@ function App() {
 
   const [selectedDivision, setSelectedDivision] = useState('Dhaka');
 
-  const handelSelectdivision = (item: string) => {
-    setSelectedDivision(item);
-  }
+  // const handelSelectdivision = (item: string) => {
+  //   setSelectedDivision(item);
+  // }
 
 
   const [selectedSeason, setselectedSeason] = useState('Summer');
@@ -158,6 +159,10 @@ function App() {
   return (
     <>
       <div>
+        <Button />
+      </div>
+
+      {/* <div>
         <Alert>
           <span className=' fw-bold '>Hello</span> world
         </Alert>
@@ -169,7 +174,7 @@ function App() {
           total={divisions.total}
           seleceted={selectedDivision}
           detail={divisionDetail[selectedDivision]}
-          onSelectItem={handelSelectdivision}
+          onSelectItem={(item: string) => setSelectedDivision(item)}
         />
       </div>
       <div className=' pb-5 '>
@@ -191,7 +196,7 @@ function App() {
           detail={weekdayDetail[selectedWeekday]}
           onSelectItem={handelSelectweeks}
         />
-      </div>
+      </div> */}
     </>
   )
 }
