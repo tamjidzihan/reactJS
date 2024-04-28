@@ -9,8 +9,6 @@ function AlertButton({ onClick }: Props) {
     const [selectButtonText, setSelectButtonText] = useState('Click the Button')
 
 
-
-
     return (
         <div >
 

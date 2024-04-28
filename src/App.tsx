@@ -7,6 +7,7 @@ import ListGroup from './components/ListGroup';
 import Alert from './components/Alert';
 import Button from './components/Button';
 import AlertButton from './components/AlertButton';
+import Message from './components/Message';
 
 function App() {
 
@@ -173,39 +174,61 @@ function App() {
   }
 
 
-
   const [alertVisible, SetAlertVisibility] = useState(false)
 
 
+  const [drink, setDrink] = useState({
+    title: "Americano",
+    price: 5
+  });
 
-
-
-
-
-
+  const handleClick = () => {
+    const newDrink = {
+      ...drink,
+      price: 6
+    };
+    setDrink(newDrink);
+  }
 
   return (
 
     <>
-
-
-      <FaUser color='green' size={50} />
-      <FaUserNurse />
-
-
-
+      <div className=' container mt-4'>
+        <p>{drink.title + ' ' + drink.price}</p>
+        <button className=' btn btn-primary ' onClick={handleClick}>Click ME</button>
+      </div>
 
 
 
-      <div className=' container text-center '>
-        {alertVisible && <Alert onClose={() => SetAlertVisibility(false)}>The Button Is Clicked </Alert>}
+
+
+
+      {/* <div className=' container text-center '>
+
+        {alertVisible && <Alert onClose={() => {
+          SetAlertVisibility(false)
+        }}>The Button has been Clicked </Alert>}
+
         <AlertButton
-          onClick={() =>
+          onClick={() => {
             SetAlertVisibility(true)
-            //
+
+          }
           }
         />
-      </div>
+      </div > */}
+
+
+      {/* <Message />
+        <Message />
+        <Message /> */}
+
+
+      {/* <FaUser color='green' size={50} />
+          <FaUserNurse />
+     */}
+
+
 
       {/* <div>
         <Button
