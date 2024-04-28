@@ -177,29 +177,83 @@ function App() {
   const [alertVisible, SetAlertVisibility] = useState(false)
 
 
-  const [drink, setDrink] = useState({
-    title: "Americano",
-    price: 5
-  });
+  // const [drink, setDrink] = useState({
+  //   title: "Americano",
+  //   price: 5
+  // });
+
+  // const handleClick = () => {
+  //   const newDrink = {
+  //     ...drink,
+  //     price: 6
+  //   };
+  //   setDrink(newDrink);
+  // }
+
+
+  const [customer, setCustomer] = useState({
+    name: 'zihan',
+    age: 30,
+    address: {
+      city: 'dhaka',
+      postcode: 1212
+    }
+  })
+
 
   const handleClick = () => {
-    const newDrink = {
-      ...drink,
-      price: 6
-    };
-    setDrink(newDrink);
+    setCustomer({
+      ...customer,
+      age: 31,
+      address: {
+        ...customer.address,
+        city: 'Rajshahi'
+      }
+    })
   }
+
+
+  const [jobs, setJobs] = useState(
+    ['Teacher', 'Technician', 'Driver']
+  )
+
+  const addJobsClick = () => {
+    setJobs([...jobs, 'Cleaner'])
+  }
+  const removeJobsClick = () => {
+    setJobs([...jobs.filter(job =>
+      job !== jobs[0]
+    )])
+  }
+
+
+
 
   return (
 
     <>
-      <div className=' container mt-4'>
+      {/* <div className=' container mt-4'>
         <p>{drink.title + ' ' + drink.price}</p>
+        <button className=' btn btn-primary ' onClick={handleClick}>Click ME</button>
+      </div> */}
+      <div className=' container mt-4'>
+        <p>Name: {customer.name}</p>
+        <p>Age: {customer.age}</p>
+        <p>City: {customer.address.city}</p>
+        <p>Post Code:{customer.address.postcode}</p>
         <button className=' btn btn-primary ' onClick={handleClick}>Click ME</button>
       </div>
 
 
+      <div className=' container mt-4'>
+        {jobs.map((job, index) =>
+          <p><span>{index + 1}: </span>{job}</p>
+        )}
+        <button type="button" className=' btn btn-success btn-block' onClick={addJobsClick}>Add Jobs</button>
+        <button type="button" className=' btn btn-danger btn-block' onClick={removeJobsClick}>Remove Jobs</button>
+        <button type="button" className=' btn btn-warning btn-block' onClick={addJobsClick}>Update Jobs</button>
 
+      </div>
 
 
 
