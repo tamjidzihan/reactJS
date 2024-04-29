@@ -2,12 +2,15 @@
 import { useState } from 'react';
 import { FaUser } from "react-icons/fa";
 import { FaUserNurse } from "react-icons/fa";
+import produce from 'immer';
 
+import Navbar from './components/Navbar';
 import ListGroup from './components/ListGroup';
 import Alert from './components/Alert';
 import Button from './components/Button';
 import AlertButton from './components/AlertButton';
 import Message from './components/Message';
+import Cart from './components/Cart';
 
 function App() {
 
@@ -225,18 +228,91 @@ function App() {
       job !== jobs[0]
     )])
   }
+  const updateJobsClick = () => {
+    setJobs(jobs.map((job, index) =>
+      job === 'Driver' ? 'Manager' : job
+    ))
+  };
 
+
+  const [bugs, setBugs] = useState([
+    { id: 1, title: 'Bug 1', fixed: false },
+    { id: 2, title: 'Bug 2', fixed: false }
+  ]);
+
+  const handleClickButton1 = () => {
+    setBugs(bugs.map(bug => bug.id === 1 ? {
+      ...bug, fixed: true
+    } : bug));
+  };
+  const handleClickButton2 = () => {
+    setBugs(produce(drft => {
+      const bug = drft.find(bug => bug.id === 2);
+      if (bug) bug.fixed = true
+    }));
+  };
+
+
+
+  const [cartItems, setCartItems] = useState(['Product1', 'Product2', 'Product3', 'Product4', 'Product5', 'Product6', 'Product7', 'Product8'])
+
+  const handleCartClear = () => {
+    setCartItems([])
+  }
 
 
 
   return (
 
     <>
+
+      <Navbar
+        cartitemsCount={cartItems.length}
+      />
+      <Cart
+        cartItems={cartItems}
+        onClear={handleCartClear}
+      />
+
+
+
+
+
+
+
+
+
+      {/* 
+      <div className=' container mt-4'>
+        <div className=' my-3 '>
+          {bugs.map((bug, index) =>
+            <div key={bug.id}>
+              <p className=' lead '>Bug {index + 1}</p>
+              <p>id: {bug.id}</p>
+              <p>Title:  {bug.title}</p>
+              <p>Status:  {bug.fixed.toString()}</p>
+            </div>
+          )}
+
+
+          <button className=' btn btn-primary ' onClick={handleClickButton1}>Fix Bug</button>
+        </div>
+        <div className=' my-3 '>
+          <p className=' lead '>Bug 2</p>
+          <p>id: {bugs[1].id}</p>
+          <p>Title:  {bugs[1].title}</p>
+          <p>Status:  {bugs[1].fixed.toString()}</p>
+          <button className=' btn btn-primary ' onClick={handleClickButton2}>Fix Bug 2</button>
+        </div>
+      </div> */}
+
+
+
       {/* <div className=' container mt-4'>
         <p>{drink.title + ' ' + drink.price}</p>
         <button className=' btn btn-primary ' onClick={handleClick}>Click ME</button>
       </div> */}
-      <div className=' container mt-4'>
+      {/* <div className=' container mt-4'>
         <p>Name: {customer.name}</p>
         <p>Age: {customer.age}</p>
         <p>City: {customer.address.city}</p>
@@ -251,9 +327,9 @@ function App() {
         )}
         <button type="button" className=' btn btn-success btn-block' onClick={addJobsClick}>Add Jobs</button>
         <button type="button" className=' btn btn-danger btn-block' onClick={removeJobsClick}>Remove Jobs</button>
-        <button type="button" className=' btn btn-warning btn-block' onClick={addJobsClick}>Update Jobs</button>
+        <button type="button" className=' btn btn-warning btn-block' onClick={updateJobsClick}>Update Jobs</button>
 
-      </div>
+      </div> */}
 
 
 
