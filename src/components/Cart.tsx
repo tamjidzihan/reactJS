@@ -11,8 +11,7 @@ function Cart({ cartItems, onClear }: Props) {
 
             <div className="container">
                 <h2>Cart Items:</h2>
-                {cartItems.length === 0 && <p>No cart Item found
-                    <FontAwesomeIcon icon="fa-solid fa-delete-left" /></p>}
+                {cartItems.length === 0 && <p>No cart Item found</p>}
                 <ul className="list-group">
                     {cartItems.map(item =>
                         <li className="list-group-item" key={item}>{item}</li>

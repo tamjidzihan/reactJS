@@ -262,25 +262,97 @@ function App() {
 
 
 
+  const [game, setGame] = useState({
+    id: 1,
+    player: {
+      name: 'Zihan'
+    }
+  })
+
+  const handleClickChange = () => {
+    setGame({
+      ...game,
+      player: {
+        ...game.player,
+        name: "Bob"
+      }
+    })
+  }
+
+  const [pizza, setPizza] = useState({
+    name: 'Spicy Pepperoni',
+    toppings: ["Mushroom"]
+  })
+
+  const handleAddPizzaClick = () => {
+    setPizza({
+      ...pizza,
+      toppings: [...pizza.toppings, 'cheese']
+    })
+  }
+
+  const [cart, setCart] = useState({
+    discount: .1,
+    items: [
+      { id: 1, title: 'Product 1', quantity: 1 },
+      { id: 2, title: 'Product 2', quantity: 1 }
+    ]
+  })
+
+
+  const handleChangeQuantityClick = () => {
+    setCart({
+      ...cart,
+      items: cart.items.map(item => item.id === 1 ? {
+        ...item,
+        quantity: 2
+      } : item)
+    })
+  }
+
   return (
 
     <>
+      {/* <div>{cart.items.map(item =>
+        <ul>
+          <li>ID: {item.id}</li>
+          <li>Title: {item.title}</li>
+          <li>Quantity: {item.quantity}</li>
+        </ul>
+      )}
+        <button className=' btn btn-primary ' onClick={handleChangeQuantityClick}>Change Quantity</button>
+      </div> */}
 
-      <Navbar
+
+
+      {/* <div className="container my-4">
+        <p className="lead">Pizza</p>
+        <p>Name: {pizza.name}</p>
+        <p>Pizza Toppings:</p>
+        <ul className="list-group">
+          {pizza.toppings.map(item =>
+            <li className='list-group-item rounded-4  '>{item}</li>
+          )}
+        </ul>
+        <button className=' btn btn-primary my-3' onClick={handleAddPizzaClick}>Add Pizza Toppings</button>
+      </div> */}
+
+
+
+      {/* <div className=' container my-4'>
+        <p className=' lead '> Player Detail</p>
+        <p>Player ID :{game.id}</p>
+        <p>Name: {game.player.name}</p>
+        <button className=' btn btn-primary ' onClick={handleClickChange}>Change Player Name</button>
+      </div> */}
+
+      {/* <Navbar
         cartitemsCount={cartItems.length}
       />
       <Cart
         cartItems={cartItems}
         onClear={handleCartClear}
-      />
-
-
-
-
-
-
-
-
+      /> */}
 
       {/* 
       <div className=' container mt-4'>

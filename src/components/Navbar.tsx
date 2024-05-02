@@ -8,8 +8,9 @@ interface Props {
 
 function Navbar({ cartitemsCount }: Props) {
     return (
-        <div>
-            NavBar : {cartitemsCount}
+        <div className=' container mt-3  '>
+            <p>NavBar</p>
+            <p>Cart:  {cartitemsCount}</p>
         </div>
     )
 }
