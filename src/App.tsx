@@ -313,6 +313,12 @@ function App() {
   return (
 
     <>
+
+
+
+
+
+
       {/* <div>{cart.items.map(item =>
         <ul>
           <li>ID: {item.id}</li>
