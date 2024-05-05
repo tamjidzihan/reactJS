@@ -11,6 +11,9 @@ import Button from './components/Button';
 import AlertButton from './components/AlertButton';
 import Message from './components/Message';
 import Cart from './components/Cart';
+import FormsUseRef from './components/FormsUseRef'
+import FormsUseState from './components/FormsUseState';
+import FormsUseForm from './components/FormsUseForm';
 
 function App() {
 
@@ -310,14 +313,29 @@ function App() {
     })
   }
 
+
+
+
+
+
+
+
+
+
   return (
 
     <>
 
 
 
+      <FormsUseForm />
 
 
+
+
+      {/* <FormsUseState /> */}
+
+      {/* <FormsUseRef /> */}
 
       {/* <div>{cart.items.map(item =>
         <ul>
