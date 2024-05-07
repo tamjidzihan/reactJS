@@ -17,6 +17,7 @@ import FormsUseForm from './components/FormsUseForm';
 import FormValidation from './components/FormValidation';
 import FormValidationWithZod from './components/FormValidationWithZod';
 import SubmitButtonDisable from './components/SubmitButtonDisable';
+import Project from './components/Project';
 
 function App() {
 
@@ -328,9 +329,13 @@ function App() {
   return (
 
     <>
+      <Project />
 
 
-      <SubmitButtonDisable />
+
+
+
+      {/* <SubmitButtonDisable /> */}
 
       {/* <FormValidationWithZod /> */}
 
@@ -413,6 +418,7 @@ function App() {
         <p>{drink.title + ' ' + drink.price}</p>
         <button className=' btn btn-primary ' onClick={handleClick}>Click ME</button>
       </div> */}
+
       {/* <div className=' container mt-4'>
         <p>Name: {customer.name}</p>
         <p>Age: {customer.age}</p>
