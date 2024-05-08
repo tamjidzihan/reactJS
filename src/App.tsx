@@ -17,7 +17,9 @@ import FormsUseForm from './components/FormsUseForm';
 import FormValidation from './components/FormValidation';
 import FormValidationWithZod from './components/FormValidationWithZod';
 import SubmitButtonDisable from './components/SubmitButtonDisable';
-import Project from './components/Project';
+import Project from './components/ProjectForm';
+import ProjectForm from './components/ProjectForm';
+import ProjectTable from './components/ProjectTable';
 
 function App() {
 
@@ -242,22 +244,6 @@ function App() {
   };
 
 
-  const [bugs, setBugs] = useState([
-    { id: 1, title: 'Bug 1', fixed: false },
-    { id: 2, title: 'Bug 2', fixed: false }
-  ]);
-
-  const handleClickButton1 = () => {
-    setBugs(bugs.map(bug => bug.id === 1 ? {
-      ...bug, fixed: true
-    } : bug));
-  };
-  const handleClickButton2 = () => {
-    setBugs(produce(drft => {
-      const bug = drft.find(bug => bug.id === 2);
-      if (bug) bug.fixed = true
-    }));
-  };
 
 
 
@@ -318,18 +304,50 @@ function App() {
   }
 
 
+  const [bugs, setBugs] = useState([
+    { id: 1, title: 'Bug 1', fixed: false },
+    { id: 2, title: 'Bug 2', fixed: false }
+  ]);
+
+  const handleClickButton1 = () => {
+    setBugs(bugs.map(bug => bug.id === 1 ? {
+      ...bug, fixed: true
+    } : bug));
+  };
+  const handleClickButton2 = () => {
+    setBugs(produce(drft => {
+      const bug = drft.find(bug => bug.id === 2);
+      if (bug) bug.fixed = true
+    }));
+  };
 
 
 
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: 'Milk', amount: 20, catagory: 'Groceries' },
+    { id: 2, description: 'Candy', amount: 4.99, catagory: 'Groceries' },
+    { id: 3, description: 'Dish Wash', amount: 13.99, catagory: 'Groceries' },
+    { id: 4, description: 'Spices', amount: 5.55, catagory: 'Groceries' },
+  ])
 
-
-
+  const hanndleDelete = (id: number) => {
+    setExpenses(
+      expenses.filter(expense => expense.id !== id)
+    )
+  }
 
 
   return (
 
     <>
-      <Project />
+      <ProjectForm />
+
+
+
+      {/* <ProjectTable
+        expenses={expenses}
+        onDelete={hanndleDelete}
+      /> */}
 
 
 

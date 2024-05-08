@@ -12,23 +12,29 @@ const schema = z.object({
         errorMap: () =>
             ({ message: "Catagory Is requaired" })
     }),
-    input: z.string().min(1, { message: "This field Is requaired" })
+    // input: z.string().min(1, { message: "This field Is requaired" })
 })
 
 type FromData = z.infer<typeof schema>
 
 
-function Project() {
+
+interface Props {
+    onSubmitForm: (data: FromData) => void;
+}
+
+function ProjectForm({ onSubmitForm }: Props) {
 
     const { register, handleSubmit, formState: { errors } } = useForm<FromData>({ resolver: zodResolver(schema) })
 
-    const onSubmit = (data: FieldValues) => {
-        console.log(data)
-    }
+    // const onSubmit = (data: FormData) => {
+    //     onSubmitForm(data);
+    // }
 
 
     return (
-        <form className=' container py-3' onSubmit={handleSubmit(onSubmit)}>
+        <form className=' container py-3' onSubmit={handleSubmit(data =>
+            onSubmitForm(data))}>
 
             <div className="form-group pb-3">
                 <label htmlFor="description">Description</label>
@@ -44,20 +50,6 @@ function Project() {
                     </div>}
             </div>
 
-            <div className="form-group pb-3">
-                <label htmlFor="input">Input</label>
-                <input
-                    {...register('input')}
-                    type="text"
-                    className="form-control"
-                    id="input"
-                    placeholder="Product Description" />
-                {errors.input &&
-                    <div className="alert alert-danger py-0 my-1 " role="alert">
-                        {errors.input.message}
-                    </div>}
-            </div>
-
 
             <div className="form-group pb-3">
                 <label htmlFor="amount">Amount</label>
@@ -65,6 +57,7 @@ function Project() {
                     {...register('amount', { valueAsNumber: true })}
                     type="number"
                     className="form-control"
+                    step="any"
                     name='amount'
                     id="amount"
                     placeholder="Product Amount" />
@@ -101,4 +94,4 @@ function Project() {
     )
 }
 
-export default Project
+export default ProjectForm
