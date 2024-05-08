@@ -25,7 +25,7 @@ interface Props {
 
 function ProjectForm({ onSubmitForm }: Props) {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<FromData>({ resolver: zodResolver(schema) })
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<FromData>({ resolver: zodResolver(schema) })
 
     // const onSubmit = (data: FormData) => {
     //     onSubmitForm(data);
@@ -33,8 +33,10 @@ function ProjectForm({ onSubmitForm }: Props) {
 
 
     return (
-        <form className=' container py-3' onSubmit={handleSubmit(data =>
-            onSubmitForm(data))}>
+        <form className=' container py-3' onSubmit={handleSubmit(data => {
+            onSubmitForm(data);
+            reset()
+        })}>
 
             <div className="form-group pb-3">
                 <label htmlFor="description">Description</label>

@@ -325,9 +325,6 @@ function App() {
 
   const [expenses, setExpenses] = useState([
     { id: 1, description: 'Milk', amount: 20, catagory: 'Groceries' },
-    { id: 2, description: 'Candy', amount: 4.99, catagory: 'Groceries' },
-    { id: 3, description: 'Dish Wash', amount: 13.99, catagory: 'Groceries' },
-    { id: 4, description: 'Spices', amount: 5.55, catagory: 'Groceries' },
   ])
 
   const hanndleDelete = (id: number) => {
@@ -337,17 +334,22 @@ function App() {
   }
 
 
+
   return (
 
     <>
-      <ProjectForm />
+      <ProjectForm
+        onSubmitForm={data =>
+          setExpenses([...expenses, { ...data, id: expenses.length + 1 }])
+        }
+      />
 
 
 
-      {/* <ProjectTable
+      <ProjectTable
         expenses={expenses}
         onDelete={hanndleDelete}
-      /> */}
+      />
 
 
 
