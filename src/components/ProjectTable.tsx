@@ -18,6 +18,8 @@ function ProjectTable({ expenses, onDelete }: Props) {
         <table className=" text-center table table-bordered container my-4">
             <thead>
                 <tr>
+
+                    <th scope="col">No#</th>
                     <th scope="col">Description</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Catagory</th>
@@ -28,8 +30,9 @@ function ProjectTable({ expenses, onDelete }: Props) {
 
                 {expenses.map(expense =>
                     <tr key={expense.id}>
-                        <th scope="row">{expense.description}</th>
-                        <td>{expense.amount}</td>
+                        <th scope="row">{expense.id}</th>
+                        <td>{expense.description}</td>
+                        <td>${expense.amount}</td>
                         <td>{expense.catagory}</td>
                         <td>
                             <button
@@ -39,10 +42,18 @@ function ProjectTable({ expenses, onDelete }: Props) {
                         </td>
                     </tr>
                 )}
-
-
-
             </tbody>
+            <tfoot>
+                <tr>
+                    <td>--</td>
+                    <th scope="row">Total</th>
+                    <td>${expenses.reduce((acc, expense) =>
+                        acc + expense.amount, 0
+                    ).toFixed(2)}</td>
+                    <td>--</td>
+                    <td>--</td>
+                </tr>
+            </tfoot>
         </table>
     )
 }

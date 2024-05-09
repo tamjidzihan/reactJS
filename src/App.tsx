@@ -1,5 +1,5 @@
 // import './App.css'
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaUser } from "react-icons/fa";
 import { FaUserNurse } from "react-icons/fa";
 import produce from 'immer';
@@ -20,6 +20,7 @@ import SubmitButtonDisable from './components/SubmitButtonDisable';
 import Project from './components/ProjectForm';
 import ProjectForm from './components/ProjectForm';
 import ProjectTable from './components/ProjectTable';
+import ProductList from './components/ProductList';
 
 function App() {
 
@@ -323,9 +324,16 @@ function App() {
 
 
 
-  const [expenses, setExpenses] = useState([
-    { id: 1, description: 'Milk', amount: 20, catagory: 'Groceries' },
-  ])
+
+
+  interface Expenses {
+    id: number;
+    description: string;
+    amount: number;
+    catagory: string;
+  }
+
+  const [expenses, setExpenses] = useState<Expenses[]>([])
 
   const hanndleDelete = (id: number) => {
     setExpenses(
@@ -335,25 +343,63 @@ function App() {
 
 
 
+
+
+
+  const ref = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (ref.current) ref.current.focus()
+  })
+  useEffect(() => {
+    document.title = 'React App'
+  })
+
+
+
   return (
 
+
     <>
-      <ProjectForm
+
+      <div className='py-5'>
+
+        <ProductList />
+
+      </div>
+
+
+      <form className='container'>
+        <div className="mb-3">
+          <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+          <input ref={ref} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+          <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+        </div>
+
+        <button type="submit" className="btn btn-primary">Submit</button>
+      </form>
+
+
+
+
+
+
+
+
+
+
+
+
+      {/* <ProjectForm
         onSubmitForm={data =>
           setExpenses([...expenses, { ...data, id: expenses.length + 1 }])
         }
       />
 
-
-
       <ProjectTable
         expenses={expenses}
         onDelete={hanndleDelete}
-      />
-
-
-
-
+      /> */}
 
       {/* <SubmitButtonDisable /> */}
 

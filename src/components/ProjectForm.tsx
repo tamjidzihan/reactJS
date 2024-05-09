@@ -17,11 +17,11 @@ const schema = z.object({
 
 type FromData = z.infer<typeof schema>
 
-
-
 interface Props {
     onSubmitForm: (data: FromData) => void;
 }
+
+
 
 function ProjectForm({ onSubmitForm }: Props) {
 
@@ -54,7 +54,7 @@ function ProjectForm({ onSubmitForm }: Props) {
 
 
             <div className="form-group pb-3">
-                <label htmlFor="amount">Amount</label>
+                <label htmlFor="amount">Amount: $ </label>
                 <input
                     {...register('amount', { valueAsNumber: true })}
                     type="number"
