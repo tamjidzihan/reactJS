@@ -346,14 +346,21 @@ function App() {
 
 
 
-  const ref = useRef<HTMLInputElement>(null)
+  // const ref = useRef<HTMLInputElement>(null)
 
-  useEffect(() => {
-    if (ref.current) ref.current.focus()
-  })
-  useEffect(() => {
-    document.title = 'React App'
-  })
+  // useEffect(() => {
+  //   if (ref.current) ref.current.focus()
+  // })
+  // useEffect(() => {
+  //   document.title = 'React App'
+  // })
+
+  const [catagory, setCtagory] = useState('')
+
+
+
+
+
 
 
 
@@ -362,14 +369,28 @@ function App() {
 
     <>
 
-      <div className='py-5'>
-
-        <ProductList />
-
-      </div>
 
 
-      <form className='container'>
+
+
+
+
+
+
+
+      {/* <div className=' container mt-5'>
+        <select className="form-select" onChange={(e) => {
+          setCtagory(e.target.value)
+        }}>
+          <option value="">Open this select menu</option>
+          <option value="Milk">Milk</option>
+          <option value="Shirt">Shirt</option>
+        </select>
+        <ProductList catagory={catagory} />
+      </div> */}
+
+
+      {/* <form className='container my-5'>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
           <input ref={ref} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
@@ -377,7 +398,7 @@ function App() {
         </div>
 
         <button type="submit" className="btn btn-primary">Submit</button>
-      </form>
+      </form> */}
 
 
 

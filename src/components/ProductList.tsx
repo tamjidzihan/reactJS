@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 
-function ProductList() {
-    const [prodects, setProducts] = useState<string[]>([])
-    const [catagory, setCatagory] = useState('')
+interface Props {
+    catagory: string
+}
+
+function ProductList({ catagory }: Props) {
+    const [product, setProduct] = useState<string[]>([])
 
     useEffect(() => {
-        console.log('Fetching Prodects ' + catagory);
-        setProducts(['Clothing', 'HouseHold'])
-    }, [])
+        console.log('Featching Product in: ' + catagory)
+        setProduct(['Milk', 'Shirt'])
+    }, [catagory])
+
 
     return (
-        <>
-            <select onChange={(event) => useState(event.target.value)} className="form-select container " aria-label="Default select example">
-                <option value="">Open this select menu</option>
-                <option value="Clothing">Clothing</option>
-                <option value="HouseHold">House Hold</option>
-            </select>
-        </>
+        <div className=' my-2 '>
+            Product Seleceted : {catagory}
+        </div>
     )
 }
 
