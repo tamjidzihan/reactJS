@@ -21,6 +21,10 @@ import Project from './components/ProjectForm';
 import ProjectForm from './components/ProjectForm';
 import ProjectTable from './components/ProjectTable';
 import ProductList from './components/ProductList';
+import axios, { Axios, AxiosError, CanceledError } from 'axios';
+
+
+
 
 function App() {
 
@@ -359,16 +363,179 @@ function App() {
 
 
 
+  // useEffect(() => {
+  //   connect()
+
+  //   return () => disconnect()
+  // })
+
+  const connect = () => console.log("connecting....");
+  const disconnect = () => console.log('disconnecting....');
+
+  interface User {
+    id: number;
+    username: string;
+    name: string;
+    phone: string;
+    email: string;
+    website: string;
+    address: {
+      city: string;
+      geo: {
+        lat: string;
+        lng: string;
+      };
+      street: string;
+      suite: string;
+      zipcode: string;
+    };
+    company: {
+      bs: string;
+      catchPhrase: string;
+      name: string;
+    }
+  }
+
+
+  const [users, setUsers] = useState<User[]>([])
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
 
 
+  // const featchUser = async () => {
+  //   try {
+  //     const res = await axios
+  //       .get<User[]>('https://jsonplaceholder.typicode.com/users')
+  //     setUsers(res.data)
+  //   }
+  //   catch (err) {
+  //     setError((err as AxiosError).message)
+  //   }
+  // }
+  // useEffect(() => { featchUser() }, [])
+
+
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setIsLoading(true);
+    axios
+      .get<User[]>('https://jsonplaceholder.typicode.com/users', { signal: controller.signal })
+      .then(res => {
+        setUsers(res.data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+        setIsLoading(false);
+      })
+    // .finally(() => {
+    //   setLoading(false)
+    // })
+    return () => controller.abort()
+  }, [])
 
 
   return (
-
-
     <>
+      {error && <p className=' text-danger lead text-center my-5'>{error}</p>}
+      {isLoading && <div className='text-center '>
+        <div className="spinner-border text-danger my-5 " role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>}
 
+      {users.map((user, index) =>
+        <section key={user.id} style={{ backgroundColor: "#eee" }}>
+          <div className="container py-5 ">
+            <h5 className="my-3 text-center ">User: {index + 1}</h5>
+            <div className="row">
+              <div className="col-lg-4">
+                <div className="card mb-4">
+                  <div className="card-body text-center">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                      className="rounded-circle img-fluid" style={{ width: "150px" }} />
+                    <h5 className="my-3">{user.username}</h5>
+                    <p className="text-muted mb-1">{user.company.catchPhrase}</p>
+                    <p className="text-muted mb-4">
+                      {user.address.street}
+                      {user.address.suite}
+                      {user.address.city}</p>
+                    <div className="d-flex justify-content-center mb-2">
+                      <button type="button" data-mdb-button-init data-mdb-ripple-init
+                        className="btn btn-primary">Follow</button>
+                      <button type="button" data-mdb-button-init data-mdb-ripple-init
+                        className="btn btn-outline-primary ms-1">Message</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-8">
+                <div className="card mb-4">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Full Name</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.name}</p>
+                      </div>
+                    </div>
+                    <hr></hr>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Email</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.email}</p>
+                      </div>
+                    </div>
+                    <hr></hr>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Phone</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.phone}</p>
+                      </div>
+                    </div>
+                    <hr></hr>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Website</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.website}</p>
+                      </div>
+                    </div>
+                    <hr></hr>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Address</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.address.street}, {user.address.city}</p>
+                      </div>
+                    </div>
+                    <hr></hr>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Conpany</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.company.name}, {user.company.bs}</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
 
 
