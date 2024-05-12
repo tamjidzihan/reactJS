@@ -359,8 +359,12 @@ function App() {
   //   document.title = 'React App'
   // })
 
-  const [catagory, setCtagory] = useState('')
 
+
+  // const [catagory, setCtagory] = useState('')
+
+  // const connect = () => console.log("connecting....");
+  // const disconnect = () => console.log('disconnecting....');
 
 
   // useEffect(() => {
@@ -369,8 +373,6 @@ function App() {
   //   return () => disconnect()
   // })
 
-  const connect = () => console.log("connecting....");
-  const disconnect = () => console.log('disconnecting....');
 
   interface User {
     id: number;
@@ -438,8 +440,25 @@ function App() {
   }, [])
 
 
+  const [selecetedUser, setSelecetedUser] = useState<User[]>()
+
   return (
     <>
+      {/* <div className=' container my-4 ' >
+        <select
+          className='form-select'
+          onChange={event =>
+            setSelecetedUser(
+              users.filter(user =>
+                user.id.toString() === event.target.value
+              )
+            )}>
+          <option value="">...</option>
+          {users.map(user =>
+            <option key={user.id} value={user.id}>{user.name}</option>
+          )}
+        </select>
+      </div>
       {error && <p className=' text-danger lead text-center my-5'>{error}</p>}
       {isLoading && <div className='text-center '>
         <div className="spinner-border text-danger my-5 " role="status">
@@ -447,7 +466,7 @@ function App() {
         </div>
       </div>}
 
-      {users.map((user, index) =>
+      {selecetedUser?.map((user, index) =>
         <section key={user.id} style={{ backgroundColor: "#eee" }}>
           <div className="container py-5 ">
             <h5 className="my-3 text-center ">User: {index + 1}</h5>
@@ -535,11 +554,7 @@ function App() {
             </div>
           </div>
         </section>
-      )}
-
-
-
-
+      )} */}
 
 
 
