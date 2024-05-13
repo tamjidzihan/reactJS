@@ -442,15 +442,69 @@ function App() {
 
   const [selecetedUser, setSelecetedUser] = useState<User[]>()
 
+  const addUser = () => {
+    const originalUsers = [...users]
+    const newUser = {
+      id: 0,
+      username: 'zihan',
+      name: 'Tamjid Zihan',
+      phone: '0174-6963565',
+      email: 'tamjid@gmail.com',
+      website: 'tamjidislam.com',
+      address: {
+        city: 'dhaka',
+        geo: {
+          lat: 'demo',
+          lng: 'demo',
+        },
+        street: 'Road-16',
+        suite: 'DIT',
+        zipcode: '1212'
+      },
+      company: {
+        bs: 'Call_exchange',
+        catchPhrase: 'huihuihui',
+        name: 'Tele-Exchange'
+      }
+    }
+    axios.post('https://jsonplaceholder.typicode.com/users', newUser)
+      .then(res => setUsers([res.data, ...users]))
+      .catch(err => {
+        setError(err.message)
+        setUsers(originalUsers)
+      })
+  }
+  const updateUser = (user: User) => {
+    const originalUsers = [...users]
+    const updatedUser = {
+      ...user,
+      name: 'Tamjid Zihan',
+    }
+    setUsers(users.map(u => u.id === user.id ? updatedUser : u))
+
+    axios.patch('https://jsonplaceholder.typicode.com/users/' + user.id, updatedUser)
+      .catch(err => {
+        setError(err.message)
+        setUsers(originalUsers)
+      })
+  }
+
+
+  const deleteUser = (user: User) => {
+    const originalUsers = [...users]
+    setUsers(users.filter(u => u.id !== user.id))
+    axios.delete('https://jsonplaceholder.typicode.com/users/' + user.id)
+      .catch(error => {
+        setError(error.message)
+        setUsers(originalUsers)
+      })
+  }
+
+
+
+
   return (
     <>
-
-
-
-
-
-
-
       <div className=' container my-4 ' >
         <select
           className='form-select'
@@ -466,17 +520,25 @@ function App() {
           )}
         </select>
       </div>
+
       {error && <p className=' text-danger lead text-center my-5'>{error}</p>}
+
       {isLoading && <div className='text-center '>
         <div className="spinner-border text-danger my-5 " role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
       </div>}
 
+      <div className=' container d-flex justify-content-center '>
+        <button className="btn btn-outline-primary " onClick={addUser}>Add User</button>
+      </div>
+
+
+
       {selecetedUser?.map((user, index) =>
         <section key={user.id} style={{ backgroundColor: "#eee" }}>
           <div className="container py-5 ">
-            <h5 className="my-3 text-center ">User: {index + 1}</h5>
+            <h5 className="my-3 text-center ">User: {user.id}</h5>
             <div className="row">
               <div className="col-lg-4">
                 <div className="card mb-4">
@@ -509,7 +571,7 @@ function App() {
                         <p className="text-muted mb-0">{user.name}</p>
                       </div>
                     </div>
-                    <hr></hr>
+                    <hr />
                     <div className="row">
                       <div className="col-sm-3">
                         <p className="mb-0">Email</p>
@@ -518,7 +580,7 @@ function App() {
                         <p className="text-muted mb-0">{user.email}</p>
                       </div>
                     </div>
-                    <hr></hr>
+                    <hr />
                     <div className="row">
                       <div className="col-sm-3">
                         <p className="mb-0">Phone</p>
@@ -527,7 +589,7 @@ function App() {
                         <p className="text-muted mb-0">{user.phone}</p>
                       </div>
                     </div>
-                    <hr></hr>
+                    <hr />
                     <div className="row">
                       <div className="col-sm-3">
                         <p className="mb-0">Website</p>
@@ -536,7 +598,7 @@ function App() {
                         <p className="text-muted mb-0">{user.website}</p>
                       </div>
                     </div>
-                    <hr></hr>
+                    <hr />
                     <div className="row">
                       <div className="col-sm-3">
                         <p className="mb-0">Address</p>
@@ -545,7 +607,7 @@ function App() {
                         <p className="text-muted mb-0">{user.address.street}, {user.address.city}</p>
                       </div>
                     </div>
-                    <hr></hr>
+                    <hr />
                     <div className="row">
                       <div className="col-sm-3">
                         <p className="mb-0">Conpany</p>
@@ -553,6 +615,13 @@ function App() {
                       <div className="col-sm-9">
                         <p className="text-muted mb-0">{user.company.name}, {user.company.bs}</p>
                       </div>
+                    </div>
+                    <hr />
+                    <div className=' d-flex justify-content-between py-0'>
+                      <p className="mb-0">Delete User:</p>
+                      <button className='btn btn-outline-danger rounded-4 py-1'
+                        onClick={() => deleteUser(user)}
+                      >Delete</button>
                     </div>
 
                   </div>
@@ -562,6 +631,107 @@ function App() {
           </div>
         </section>
       )}
+
+      {users.map((user, index) =>
+        <section key={user.id} style={{ backgroundColor: "#eee" }}>
+          <div className="container py-5 ">
+            <h5 className="my-3 text-center ">User: {user.id}</h5>
+            <div className="row">
+              <div className="col-lg-4">
+                <div className="card mb-4">
+                  <div className="card-body text-center">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                      className="rounded-circle img-fluid" style={{ width: "150px" }} />
+                    <h5 className="my-3">{user.username}</h5>
+                    <p className="text-muted mb-1">{user.company.catchPhrase}</p>
+                    <p className="text-muted mb-4">
+                      {user.address.street}
+                      {user.address.suite}
+                      {user.address.city}</p>
+                    <div className="d-flex justify-content-center mb-2">
+                      <button type="button" data-mdb-button-init data-mdb-ripple-init
+                        className="btn btn-primary">Follow</button>
+                      <button type="button" data-mdb-button-init data-mdb-ripple-init
+                        className="btn btn-outline-primary ms-1">Message</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-8">
+                <div className="card mb-4">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Full Name</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.name}</p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Email</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.email}</p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Phone</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.phone}</p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Website</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.website}</p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Address</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.address.street}, {user.address.city}</p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Conpany</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.company.name}, {user.company.bs}</p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className=' d-flex justify-content-between py-0'>
+                      <p className="mb-0">Delete/Update User:</p>
+
+                      <button className="btn btn-outline-secondary " onClick={() => updateUser(user)}>Update user</button>
+
+                      <button className='btn btn-outline-danger rounded-4 py-1'
+                        onClick={() => deleteUser(user)}
+                      >Delete</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
 
 
 
